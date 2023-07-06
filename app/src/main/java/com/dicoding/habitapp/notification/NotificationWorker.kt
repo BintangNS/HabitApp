@@ -12,6 +12,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.dicoding.habitapp.R
 import com.dicoding.habitapp.ui.countdown.CountDownActivity
+import com.dicoding.habitapp.ui.detail.DetailHabitActivity
 import com.dicoding.habitapp.utils.HABIT_ID
 import com.dicoding.habitapp.utils.HABIT_TITLE
 import com.dicoding.habitapp.utils.NOTIFICATION_CHANNEL_ID
@@ -37,10 +38,10 @@ class NotificationWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, p
 
     private fun showNotification() {
         val channelId = NOTIFICATION_CHANNEL_ID
-        val notificationId = habitId // Use habitId as the notificationId
+        val notificationId = habitId
 
         // Create a PendingIntent to launch the CountDownActivity when the notification is clicked
-        val intent = Intent(applicationContext, CountDownActivity::class.java).apply {
+        val intent = Intent(applicationContext, DetailHabitActivity::class.java).apply {
             // Pass the habitId to the CountDownActivity
             putExtra(HABIT_ID, habitId)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -61,8 +62,8 @@ class NotificationWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, p
         // Build the notification
         val notificationBuilder = NotificationCompat.Builder(applicationContext, channelId)
             .setSmallIcon(R.drawable.ic_notifications)
-            .setContentTitle(applicationContext.getString(R.string.notify_channel_name))
-            .setContentText(habitTitle)
+            .setContentTitle(habitTitle)
+            .setContentText(applicationContext.getString(R.string.notify_content))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

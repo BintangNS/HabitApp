@@ -19,6 +19,7 @@ import com.dicoding.habitapp.setting.SettingsActivity
 import com.dicoding.habitapp.ui.ViewModelFactory
 import com.dicoding.habitapp.ui.add.AddHabitActivity
 import com.dicoding.habitapp.ui.detail.DetailHabitActivity
+import com.dicoding.habitapp.ui.random.RandomHabitActivity
 import com.dicoding.habitapp.utils.Event
 import com.dicoding.habitapp.utils.HabitSortType
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -93,9 +94,11 @@ class HabitListActivity : AppCompatActivity() {
                 showFilteringPopUpMenu()
                 true
             }
-//            R.id.action_random -> {
-//
-//            }
+            R.id.action_random -> {
+                val randomHabit = Intent(this, RandomHabitActivity::class.java)
+                startActivity(randomHabit)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

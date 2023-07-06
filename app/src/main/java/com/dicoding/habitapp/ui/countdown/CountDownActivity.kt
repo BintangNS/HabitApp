@@ -3,6 +3,7 @@ package com.dicoding.habitapp.ui.countdown
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.OneTimeWorkRequest
@@ -12,6 +13,7 @@ import androidx.work.workDataOf
 import com.dicoding.habitapp.R
 import com.dicoding.habitapp.data.Habit
 import com.dicoding.habitapp.notification.NotificationWorker
+import com.dicoding.habitapp.ui.list.HabitListViewModel
 import com.dicoding.habitapp.utils.HABIT
 import com.dicoding.habitapp.utils.HABIT_ID
 import com.dicoding.habitapp.utils.HABIT_TITLE
@@ -26,6 +28,7 @@ class CountDownActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_count_down)
         supportActionBar?.title = "Count Down"
+
 
         habit = intent.getParcelableExtra<Habit>(HABIT) as Habit
         workManager = WorkManager.getInstance(applicationContext)

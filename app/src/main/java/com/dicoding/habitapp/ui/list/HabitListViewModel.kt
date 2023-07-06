@@ -42,4 +42,8 @@ class HabitListViewModel(private val habitRepository: HabitRepository) : ViewMod
     fun insert(habit: Habit) {
         habitRepository.insertHabit(habit)
     }
+
+    fun getHabitById(habitId: Int): LiveData<Habit> {
+        return habitRepository.getHabitById(habitId)
+    }
 }
