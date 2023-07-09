@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dicoding.habitapp.R
 import org.json.JSONArray
 import org.json.JSONException
@@ -29,11 +30,16 @@ abstract class HabitDatabase : RoomDatabase() {
                     context.applicationContext,
                     HabitDatabase::class.java,
                     "habit.db"
-                ).build()
+                ).addCallback(object : RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        // Populate data on creation of the database
+                        Thread {
+                            INSTANCE?.habitDao()?.let { fillWithStartingData(context, it) }
+                        }.start()
+                    }
+                }).build()
                 INSTANCE = instance
-                Thread {
-                    fillWithStartingData(context, instance.habitDao())
-                }.start()
                 instance
             }
         }

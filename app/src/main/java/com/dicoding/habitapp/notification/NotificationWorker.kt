@@ -48,7 +48,7 @@ class NotificationWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, p
         }
         val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
 
-        // Create the notification channel (required for Android 8.0 and above)
+        // Create the notification channeL
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,

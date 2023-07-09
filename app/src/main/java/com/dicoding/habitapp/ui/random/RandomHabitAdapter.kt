@@ -51,7 +51,7 @@ class RandomHabitAdapter(
 
         fun bind(pageType: PageType, pageData: Habit) {
             title.text = pageData.title
-            startTime.text = pageData.startTime.toString()
+            startTime.text = pageData.startTime
 
             val priorityImageResource = when (pageType) {
                 PageType.HIGH -> R.drawable.ic_priority_high
